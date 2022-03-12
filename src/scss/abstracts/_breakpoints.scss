@@ -1,0 +1,12 @@
+// Media queries breakpoints
+$breakpoints: (
+  "small": (
+    max-width: 530px,
+  ),
+  "medium": (
+    min-width: 650px,
+  ),
+  "large": (
+    min-width: 800px,
+  ),
+);
