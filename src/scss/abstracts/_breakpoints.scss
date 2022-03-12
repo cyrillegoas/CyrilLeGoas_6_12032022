@@ -1,7 +1,7 @@
 // Media queries breakpoints
 $breakpoints: (
   "small": (
-    max-width: 530px,
+    min-width: 530px,
   ),
   "medium": (
     min-width: 650px,

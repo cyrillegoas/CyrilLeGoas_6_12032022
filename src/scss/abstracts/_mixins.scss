@@ -1,3 +1,5 @@
+@use "./breakpoints" as *;
+
 // media query mixin
 @mixin respond-to($breakpoint) {
   $raw-query: map-get($breakpoints, $breakpoint);
