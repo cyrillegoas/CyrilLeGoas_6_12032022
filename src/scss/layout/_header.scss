@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+.header {
+  max-width: 1440px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  @include respond-to("small") {
+    padding: 0 10rem;
+  }
+
+  &__link {
+    margin-right: auto;
+  }
+
+  &__logo {
+    width: 20rem;
+    min-width: 20rem;
+  }
+
+  &__title {
+    font-size: 3.6rem;
+    font-weight: normal;
+    color: $text-highlight-secondary;
+    margin-left: 2rem;
+  }
+}
