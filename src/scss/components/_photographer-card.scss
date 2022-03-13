@@ -42,8 +42,11 @@
     font-size: 3.6rem;
     font-weight: normal;
     color: $text-highlight-primary;
-    margin-left: -100%;
-    margin-right: -100%;
+
+    @include respond-to("smaller") {
+      margin-left: -100%;
+      margin-right: -100%;
+    }
   }
 
   &__description span:not(span:last-of-type) {
@@ -64,8 +67,11 @@
   &__quote {
     font-size: 1rem;
     color: $text-black;
-    margin-left: -100%;
-    margin-right: -100%;
+
+    @include respond-to("smaller") {
+      margin-left: -100%;
+      margin-right: -100%;
+    }
   }
 
   &__rate {
