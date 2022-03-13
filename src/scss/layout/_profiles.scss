@@ -1,0 +1,19 @@
+@use "../abstracts/" as *;
+
+.profiles {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  justify-items: center;
+  gap: 7.5rem 31.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  @include respond-to("small") {
+    padding: 0 10rem;
+  }
+
+  &__card {
+    width: fit-content;
+  }
+}
