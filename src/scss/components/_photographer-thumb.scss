@@ -1,0 +1,19 @@
+.photographer-thumb {
+  height: 220px;
+  display: grid;
+  justify-items: center;
+
+  &__img {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    object-fit: cover;
+    width: 198px;
+    height: 219px;
+  }
+
+  &__img-clip {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    pointer-events: none;
+  }
+}
