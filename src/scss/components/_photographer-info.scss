@@ -1,0 +1,59 @@
+@use "../abstracts" as *;
+
+.photographer-info {
+  padding: 5.6rem 2rem 3.6rem;
+  background-color: $grey;
+  border-radius: $radius-normal;
+
+  @include respond-to("small") {
+    padding: 5.6rem 5rem 3.6rem;
+  }
+
+  display: flex;
+  gap: 5rem 5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  @include respond-to("large") {
+    justify-content: space-between;
+  }
+
+  &__description {
+    flex-basis: 100%;
+    @include respond-to("large") {
+      flex-basis: auto;
+    }
+  }
+
+  &__btn-wrapper {
+    min-width: 200px;
+    display: grid;
+    justify-items: center;
+  }
+
+  &__name,
+  &__location,
+  &__quote {
+    font-weight: normal;
+    line-height: 1.3;
+  }
+
+  &__name {
+    font-size: 6.4rem;
+    color: $text-highlight-primary;
+  }
+
+  &__location {
+    display: block;
+    font-size: 2.4rem;
+    color: $text-highlight-secondary;
+    margin-bottom: 1.9rem;
+  }
+
+  &__quote {
+    display: block;
+    font-size: 1.8rem;
+    color: $text-grey;
+  }
+}

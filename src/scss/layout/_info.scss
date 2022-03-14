@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+.info-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  @include respond-to("small") {
+    padding: 0 10rem;
+  }
+}
