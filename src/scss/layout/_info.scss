@@ -2,7 +2,7 @@
 
 .info-wrapper {
   max-width: 1440px;
-  margin: 0 auto;
+  margin: -7rem auto 0;
   padding: 0 2rem;
 
   @include respond-to("small") {
