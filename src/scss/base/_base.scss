@@ -1,6 +1,13 @@
+@use "../abstracts" as *;
+
 ul,
 ol {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+*:focus {
+  outline: 4px solid $focus-outline-color;
+  outline-offset: 4px;
 }
