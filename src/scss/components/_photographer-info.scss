@@ -4,16 +4,15 @@
   padding: 5.6rem 2rem 3.6rem;
   background-color: $grey;
   border-radius: $radius-normal;
+  display: flex;
+  gap: calc(5rem - 20px) 5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
   @include respond-to("small") {
     padding: 5.6rem 5rem 3.6rem;
   }
-
-  display: flex;
-  gap: 5rem 5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
 
   @include respond-to("large") {
     justify-content: space-between;
@@ -21,6 +20,7 @@
 
   &__description {
     flex-basis: 100%;
+    margin-bottom: 20px;
     @include respond-to("large") {
       flex-basis: auto;
     }
@@ -30,6 +30,7 @@
     min-width: 200px;
     display: grid;
     justify-items: center;
+    margin-bottom: 20px;
   }
 
   &__name,
