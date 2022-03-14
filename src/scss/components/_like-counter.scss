@@ -1,0 +1,48 @@
+@use "../abstracts" as *;
+
+.like-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.1rem 3.1rem;
+  background-color: $secondary;
+  font-size: 2.4rem;
+  color: $text-black;
+  border-top-left-radius: $radius-normal;
+  border-top-right-radius: $radius-normal;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+
+  @include respond-to("small") {
+    width: auto;
+    right: 36px;
+  }
+
+  @include respond-to("max-width") {
+    right: calc(50% - 684px);
+  }
+
+  &__total-icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    margin-left: 0.45rem;
+
+    @include respond-to("smaller") {
+      margin-right: auto;
+    }
+
+    @include respond-to("small") {
+      margin-right: 6rem;
+    }
+  }
+
+  &__rate {
+    display: none;
+
+    @include respond-to("smaller") {
+      display: block;
+    }
+  }
+}
