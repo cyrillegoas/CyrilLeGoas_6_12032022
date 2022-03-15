@@ -4,6 +4,7 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
+  margin-bottom: 10rem;
 
   @include respond-to("small") {
     padding: 0 10rem;
