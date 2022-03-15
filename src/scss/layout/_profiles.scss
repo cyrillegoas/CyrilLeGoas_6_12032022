@@ -8,6 +8,7 @@
   justify-items: center;
   gap: 7.5rem 31.7rem;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 10rem;
 
   @include respond-to("small") {
     padding: 0 10rem;
