@@ -28,6 +28,8 @@
     background-color: $secondary;
     padding: 1.5rem 3.5rem 3.8rem;
     border-radius: $radius-normal;
+    max-height: 100vh;
+    overflow: auto;
 
     @include respond-to("medium") {
       width: calc(100% - 20rem);
