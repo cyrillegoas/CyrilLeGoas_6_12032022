@@ -10,6 +10,7 @@
   border: 0;
   border-radius: $radius-normal;
   transition: background-color 250ms ease-in-out;
+  cursor: pointer;
 
   &:hover,
   &:focus {
