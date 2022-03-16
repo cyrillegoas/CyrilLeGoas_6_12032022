@@ -12,6 +12,10 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 
+  @include respond-to("portrait") {
+    padding: 0;
+  }
+
   &--open {
     opacity: 1;
     pointer-events: all;
@@ -22,6 +26,11 @@
     gap: 0 3.4rem;
     grid-template-columns: 4.2rem auto 4.2rem;
     grid-template-rows: 5vh 90vh 5vh;
+
+    @include respond-to("portrait") {
+      display: block;
+      position: relative;
+    }
   }
 
   &__img-wrapper {
@@ -31,11 +40,19 @@
     justify-items: center;
     align-items: center;
     background-color: $grey;
+
+    @include respond-to("portrait") {
+      background-color: $white;
+    }
   }
 
   &__img {
     object-fit: contain;
     height: 90vh;
+
+    @include respond-to("portrait") {
+      height: 100vh;
+    }
   }
 
   & button {
@@ -48,8 +65,24 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 
+    @include respond-to("portrait") {
+      position: absolute;
+      padding: 1rem;
+      border-radius: $radius-normal;
+    }
+
     & svg {
       display: block;
+
+      @include respond-to("portrait") {
+        filter: drop-shadow(0 0 1rem $black);
+      }
+
+      & path {
+        @include respond-to("portrait") {
+          fill: $white;
+        }
+      }
     }
   }
 
@@ -75,16 +108,37 @@
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     align-self: flex-start;
+
+    @include respond-to("portrait") {
+      width: 6.2rem;
+      top: 2rem;
+      right: 2rem;
+    }
   }
 
   &__next-btn {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+
+    @include respond-to("portrait") {
+      right: 2rem;
+    }
   }
 
   &__next-btn,
   &__prev-btn {
     width: 3rem;
+    @include respond-to("portrait") {
+      width: 5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__prev-btn {
+    @include respond-to("portrait") {
+      left: 2rem;
+    }
   }
 
   &__title {
@@ -94,5 +148,16 @@
     color: $text-highlight-secondary;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
+
+    @include respond-to("portrait") {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      padding: 1rem;
+      background-color: $primary;
+      color: $white;
+      border-radius: $radius-normal;
+      font-size: 1.5rem;
+    }
   }
 }

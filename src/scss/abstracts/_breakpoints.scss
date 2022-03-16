@@ -15,4 +15,7 @@ $breakpoints: (
   "max-width": (
     min-width: 1440px,
   ),
+  "portrait": (
+    orientation: portrait,
+  ),
 );
