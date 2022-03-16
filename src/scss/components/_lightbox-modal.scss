@@ -67,7 +67,6 @@
 
     @include respond-to("portrait") {
       position: absolute;
-      padding: 1rem;
       border-radius: $radius-normal;
     }
 
@@ -110,7 +109,6 @@
     align-self: flex-start;
 
     @include respond-to("portrait") {
-      width: 6.2rem;
       top: 2rem;
       right: 2rem;
     }
@@ -129,7 +127,6 @@
   &__prev-btn {
     width: 3rem;
     @include respond-to("portrait") {
-      width: 5rem;
       top: 50%;
       transform: translateY(-50%);
     }
