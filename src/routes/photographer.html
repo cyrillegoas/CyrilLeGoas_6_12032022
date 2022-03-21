@@ -15,7 +15,10 @@
   </head>
   <body>
     <header class="header">
-      <a class="header__link" href="../../index.html"
+      <a
+        class="header__link"
+        href="../../index.html"
+        aria-label="link to home page"
         ><img
           class="header__logo"
           src="../../assets/logo/logo.png"
@@ -33,7 +36,9 @@
             >
           </div>
           <div class="photographer-info__btn-wrapper">
-            <button class="btn">Contactez-moi</button>
+            <button class="btn" aria-haspopup="dialog" aria-label="contact me">
+              Contactez-moi
+            </button>
           </div>
           <div class="photographer-thumb">
             <img
@@ -45,16 +50,21 @@
               class="photographer-thumb__img-clip"
               data="../../assets/utils/mask_card-grey.svg"
               type="image/svg+xml"
+              tabindex="-1"
             ></object>
           </div>
-          <div class="contact-modal">
+          <div class="contact-modal" role="dialog" aria-labelledby="formTitle">
             <form class="contact-modal__form" action="#">
               <div class="contact-modal__header">
-                <h1 class="contact-modal__title">
+                <h1 id="formTitle" class="contact-modal__title">
                   Contactez-moi<br />Mimi Keel
                 </h1>
-                <button type="button" class="contact-modal__close">
-                  <img src="../../assets/utils/close.svg" alt="" />
+                <button
+                  type="button"
+                  class="contact-modal__close"
+                  aria-label="close contact form"
+                >
+                  <img src="../../assets/utils/close.svg" alt="close button" />
                 </button>
               </div>
               <label class="contact-modal__label" for="firstname">Prénom</label>
@@ -86,7 +96,7 @@
                 id="message"
                 name="message"
               ></textarea>
-              <button class="btn">Envoyer</button>
+              <button class="btn" aria-label="send message">Envoyer</button>
             </form>
           </div>
         </section>
@@ -140,8 +150,9 @@
                     ../../assets/medias/id/Animals_Rainbow_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Animals_Rainbow_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -150,7 +161,7 @@
                     <img
                       class="photo-card__likes-icon"
                       src="../../assets/utils/heart.svg"
-                      alt=""
+                      alt="likes"
                     />
                   </div>
                 </figcaption>
@@ -166,8 +177,9 @@
                     ../../assets/medias/id/Animals_Wild_Horses_in_the_mountains_thumb_w_350.png 350w
                   "
                   src="../../assets/medias/id/Animals_Wild_Horses_in_the_mountains_thumb_w_350.png"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -192,8 +204,9 @@
                     ../../assets/medias/id/Event_BenevidesWedding_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Event_BenevidesWedding_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -218,8 +231,9 @@
                     ../../assets/medias/id/Event_PintoWedding_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Event_PintoWedding_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -244,8 +258,9 @@
                     ../../assets/medias/id/Event_SeasideWedding_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Event_SeasideWedding_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -270,8 +285,9 @@
                     ../../assets/medias/id/Portrait_Background_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Portrait_Background_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -296,8 +312,9 @@
                     ../../assets/medias/id/Portrait_Nora_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Portrait_Nora_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -322,8 +339,9 @@
                     ../../assets/medias/id/Portrait_Wednesday_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Portrait_Wednesday_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -348,8 +366,9 @@
                     ../../assets/medias/id/Travel_HillsideColor_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Travel_HillsideColor_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -374,8 +393,9 @@
                     ../../assets/medias/id/Travel_Lonesome_w_350.jpg 350w
                   "
                   src="../../assets/medias/id/Travel_Lonesome_w_350.jpg"
-                  alt=""
+                  alt="Lilac breasted roller, click or enter to open closeup view"
                   tabindex="0"
+                  aria-haspopup="dialog"
                 />
                 <figcaption class="photo-card__description">
                   <span class="photo-card__name">Arc-en-ciel </span>
@@ -400,10 +420,17 @@
             />
             <span class="like-counter__rate">300€ / jour</span>
           </div>
-          <div class="lightbox-modal">
+          <div
+            class="lightbox-modal"
+            role="dialog"
+            aria-label="image closeup view"
+          >
             <div class="lightbox-modal__inner">
               <div class="lightbox-modal__prev-btn-wrapper">
-                <button class="lightbox-modal__prev-btn">
+                <button
+                  class="lightbox-modal__prev-btn"
+                  aria-label="previous image"
+                >
                   <svg
                     viewBox="0 0 30 48"
                     width="30"
@@ -422,11 +449,14 @@
                 <img
                   class="lightbox-modal__img"
                   src="https://picsum.photos/2500/3400"
-                  alt=""
+                  alt="lilac bird"
                 />
               </div>
               <div class="lightbox-modal__next-btn-wrapper">
-                <button class="lightbox-modal__close-btn">
+                <button
+                  class="lightbox-modal__close-btn"
+                  aria-label="close dialog"
+                >
                   <svg
                     viewBox="0 0 42 42"
                     width="42"
@@ -440,7 +470,10 @@
                     />
                   </svg>
                 </button>
-                <button class="lightbox-modal__next-btn">
+                <button
+                  class="lightbox-modal__next-btn"
+                  aria-label="next image"
+                >
                   <svg
                     viewBox="0 0 30 48"
                     width="30"
