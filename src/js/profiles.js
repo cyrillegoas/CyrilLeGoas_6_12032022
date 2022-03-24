@@ -15,7 +15,7 @@ function generatePhotographersCards(photographers) {
           <figure class="photographer-card">
             <a
               class="photographer-card__link"
-              href="./src/routes/photographer.html?id=${photographer.id}"
+              href="./src/pages/photographer.html?id=${photographer.id}"
               aria-label="link to ${photographer.name}'s photos gallery"
             >
               <div class="photographer-thumb">
