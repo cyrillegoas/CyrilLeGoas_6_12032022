@@ -1,7 +1,5 @@
+import params from './appParams';
 import { fetchJson } from './utils';
-
-const dataPath = '../../assets/data/photographer.json';
-
 /**
  * Generate profiles cards from an array of list of photographers.
  * @param {Array<object>} photographers - list of photographers with their name / id / location / picture...
@@ -52,7 +50,7 @@ function generatePhotographersCards(photographers) {
  * @param {object} profilesUl - unordered list where photographers cards are added.
  */
 export default async function profilesInit(profilesUl) {
-  const { photographers } = await fetchJson(dataPath);
+  const { photographers } = await fetchJson(params.dataPath);
   const profileCardsHTML = generatePhotographersCards(photographers);
   profilesUl.innerHTML = profileCardsHTML;
 }
