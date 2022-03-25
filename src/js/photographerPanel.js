@@ -1,9 +1,6 @@
-import params from './appParams';
-import { fetchJson } from './utils';
-
 /**
  * Generate photographer info panel html.
- * @param {object} photographerInfo - photographer info name / id / location / picture...
+ * @param {object} photographerInfo - photographer info for the current page.
  * @return {string} info panel html.
  */
 function generateInfoPanel(photographerInfo) {
@@ -34,14 +31,9 @@ function generateInfoPanel(photographerInfo) {
 /**
  * Fill the photographer information panel.
  * @param {object} infoSection - photographer info section element.
+ * @param {object} photographerInfo - photographer info for the current page.
  */
-export default async function infoInit(infoSection) {
-  const { photographers } = await fetchJson(params.dataPath);
-  const UrlParams = new URL(document.location).searchParams;
-  const photographerId = +UrlParams.get('id');
-  const photographerInfo = photographers.find(
-    (photographer) => photographer.id === photographerId
-  );
+export default function infoPanelInit(infoSection, photographerInfo) {
   const infoPanelHTML = generateInfoPanel(photographerInfo);
   infoSection.insertAdjacentHTML('afterbegin', infoPanelHTML);
 }

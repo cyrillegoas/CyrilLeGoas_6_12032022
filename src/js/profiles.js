@@ -1,12 +1,10 @@
-import params from './appParams';
-import { fetchJson } from './utils';
 /**
  * Generate profiles cards from an array of list of photographers.
- * @param {Array<object>} photographers - list of photographers with their name / id / location / picture...
+ * @param {object} photographers - collection of photographer information
  * @return {string} cards html for all photographers.
  */
 function generatePhotographersCards(photographers) {
-  const html = photographers
+  const html = Object.values(photographers)
     .map(
       (photographer) =>
         `<li class="profiles__card">
@@ -48,9 +46,9 @@ function generatePhotographersCards(photographers) {
 /**
  * Fill an unordered list with photographers cards.
  * @param {object} profilesUl - unordered list where photographers cards are added.
+ * @param {object} photographers - collection of photographer information.
  */
-export default async function profilesInit(profilesUl) {
-  const { photographers } = await fetchJson(params.dataPath);
+export default function profilesInit(profilesUl, photographers) {
   const profileCardsHTML = generatePhotographersCards(photographers);
   profilesUl.innerHTML = profileCardsHTML;
 }
