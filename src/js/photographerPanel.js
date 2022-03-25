@@ -43,14 +43,14 @@ function ContactModal(modal, photographerInfo) {
   const modalTitle = modal.querySelector('.contact-modal__title');
   this.closeModalButton = modal.querySelector('button.contact-modal__close');
   this.submitButton = modal.querySelector('button[aria-label="send message"]');
-  const from = modal.querySelector('form.contact-modal__form');
+  this.from = modal.querySelector('form.contact-modal__form');
 
   modalTitle.innerHTML = `Contactez-moi<br />${photographerInfo.name}`;
 
   // Event listener
   modal.addEventListener('click', (event) => this.handleClickOutside(event));
   this.closeModalButton.addEventListener('click', () => this.closeModal());
-  from.addEventListener('submit', (event) => this.submitForm(event));
+  this.from.addEventListener('submit', (event) => this.submitForm(event));
   modal.addEventListener('keydown', (event) => this.handleKeyDown(event));
 }
 
@@ -58,6 +58,7 @@ ContactModal.prototype.openModal = async function () {
   this.modal.removeAttribute('hidden');
   await wait();
   this.modal.setAttribute('aria-hidden', 'false');
+  this.from.querySelector('input').focus();
 };
 
 ContactModal.prototype.closeModal = async function () {
@@ -71,20 +72,25 @@ ContactModal.prototype.handleClickOutside = function (event) {
 };
 
 ContactModal.prototype.handleKeyDown = function (event) {
-  if (
-    event.key === 'Tab' &&
-    event.shiftKey &&
-    document.activeElement === this.closeModalButton
-  ) {
-    event.preventDefault();
-    this.submitButton.focus();
-  } else if (
-    event.key === 'Tab' &&
-    !event.shiftKey &&
-    document.activeElement === this.submitButton
-  ) {
-    event.preventDefault();
-    this.closeModalButton.focus();
+  switch (event.key) {
+    case 'Tab':
+      if (event.shiftKey && document.activeElement === this.closeModalButton) {
+        event.preventDefault();
+        this.submitButton.focus();
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === this.submitButton
+      ) {
+        event.preventDefault();
+        this.closeModalButton.focus();
+      }
+      break;
+    case 'Escape':
+      console.log('test');
+      this.closeModal();
+      break;
+    default:
+      break;
   }
 };
 
