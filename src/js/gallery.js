@@ -59,7 +59,7 @@ Gallery.prototype.renderGalleryCards = function () {
               />
               <figcaption class="photo-card__description">
                 <span class="photo-card__name">${media.title}</span>
-                <div class="photo-card__likes">
+                <div class="photo-card__likes" tabindex="0">
                   <span class="photo-card__likes-count">${media.likes}</span>
                   <img
                     class="photo-card__likes-icon"
