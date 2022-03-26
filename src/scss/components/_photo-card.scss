@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     gap: 0.637rem;
+    flex-shrink: 0;
   }
 
   &__likes-icon {
