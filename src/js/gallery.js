@@ -83,6 +83,7 @@ Gallery.prototype.openLightBox = async function () {
   this.lightBox.removeAttribute('hidden');
   await wait();
   this.lightBox.setAttribute('aria-hidden', 'false');
+  this.focusBeforeOpenning = document.activeElement;
   this.lightBox.focus();
 };
 
@@ -90,6 +91,7 @@ Gallery.prototype.closeLightBox = async function () {
   this.lightBox.setAttribute('aria-hidden', 'true');
   await wait(500);
   this.lightBox.setAttribute('hidden', '');
+  this.focusBeforeOpenning.focus();
 };
 
 Gallery.prototype.updateLightBoxMedia = function () {
