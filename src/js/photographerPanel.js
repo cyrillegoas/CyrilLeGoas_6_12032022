@@ -58,7 +58,6 @@ ContactModal.prototype.openModal = async function () {
   this.modal.removeAttribute('hidden');
   await wait();
   this.modal.setAttribute('aria-hidden', 'false');
-  console.log(this);
   this.form.querySelector('input').focus();
 };
 
