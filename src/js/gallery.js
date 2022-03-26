@@ -13,10 +13,10 @@ function Gallery(gallery, photographerInfo) {
   const lightBoxCloseButton = gallery.querySelector(
     'button.lightbox-modal__close-btn'
   );
-  const lightBoxNextbutton = gallery.querySelector(
+  this.lightBoxNextbutton = gallery.querySelector(
     'button.lightbox-modal__next-btn'
   );
-  const lightBoxPrevbutton = gallery.querySelector(
+  this.lightBoxPrevbutton = gallery.querySelector(
     'button.lightbox-modal__prev-btn'
   );
 
@@ -27,8 +27,8 @@ function Gallery(gallery, photographerInfo) {
     this.handleGalleryEvent(event)
   );
   lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
-  lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
-  lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
+  this.lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
+  this.lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
   this.lightBox.addEventListener('keydown', (event) =>
     this.handleKeyDown(event)
   );
@@ -124,12 +124,31 @@ Gallery.prototype.prevMedia = function () {
 };
 
 Gallery.prototype.handleKeyDown = function (event) {
-  console.log(event);
   switch (event.key) {
     case 'Escape':
       this.closeLightBox();
       break;
-
+    case 'ArrowLeft':
+      this.prevMedia();
+      break;
+    case 'ArrowRight':
+      this.nextMedia();
+      break;
+    case 'Tab':
+      if (
+        event.shiftKey &&
+        document.activeElement === this.lightBoxPrevbutton
+      ) {
+        event.preventDefault();
+        this.lightBoxNextbutton.focus();
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === this.lightBoxNextbutton
+      ) {
+        event.preventDefault();
+        this.lightBoxPrevbutton.focus();
+      }
+      break;
     default:
       break;
   }
