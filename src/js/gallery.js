@@ -13,6 +13,12 @@ function Gallery(gallery, photographerInfo) {
   const lightBoxCloseButton = gallery.querySelector(
     'button.lightbox-modal__close-btn'
   );
+  const lightBoxNextbutton = gallery.querySelector(
+    'button.lightbox-modal__next-btn'
+  );
+  const lightBoxPrevbutton = gallery.querySelector(
+    'button.lightbox-modal__prev-btn'
+  );
 
   this.renderGalleryCards();
 
@@ -21,6 +27,8 @@ function Gallery(gallery, photographerInfo) {
     this.handleGalleryEvent(event)
   );
   lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
+  lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
+  lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
 }
 
 Gallery.prototype.renderGalleryCards = function () {
@@ -95,9 +103,20 @@ Gallery.prototype.handleGalleryEvent = function (event) {
       (media) => media.id === +mediaId
     );
     this.updateLightBoxMedia();
-    // console.log(this.currentMediaIndex);
     this.openLightBox();
   }
+};
+
+Gallery.prototype.nextMedia = function () {
+  if (++this.currentMediaIndex >= this.sortedMedia.length)
+    this.currentMediaIndex = 0;
+  this.updateLightBoxMedia();
+};
+
+Gallery.prototype.prevMedia = function () {
+  if (--this.currentMediaIndex <= 0)
+    this.currentMediaIndex = this.sortedMedia.length - 1;
+  this.updateLightBoxMedia();
 };
 
 export default function galleryInit(gallerySection, photographerInfo) {
