@@ -9,6 +9,11 @@ function Gallery(gallery, photographerInfo) {
     this.sort[this.sortType],
     this.media
   );
+  this.likesCount = this.sortedMedia.reduce(
+    (totalLikes, media) => totalLikes + media.likes,
+    0
+  );
+  this.likeCounter = gallery.querySelector('.like-counter__total');
   this.lightBox = gallery.querySelector('.lightbox-modal');
   const lightBoxCloseButton = gallery.querySelector(
     'button.lightbox-modal__close-btn'
@@ -21,6 +26,7 @@ function Gallery(gallery, photographerInfo) {
   );
 
   this.renderGalleryCards();
+  this.updateLikeCounter();
 
   // Event listeners
   this.cardsUnorderedList.addEventListener('click', (event) =>
@@ -162,6 +168,10 @@ Gallery.prototype.handleKeyDown = function (event) {
     default:
       break;
   }
+};
+
+Gallery.prototype.updateLikeCounter = function () {
+  this.likeCounter.textContent = this.likesCount;
 };
 
 export default function galleryInit(gallerySection, photographerInfo) {
