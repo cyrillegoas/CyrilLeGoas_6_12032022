@@ -1,14 +1,26 @@
+import { wait } from './utils';
+
 function Gallery(gallery, photographerInfo) {
   this.gallery = gallery;
-  this.cardsUnorderedList = this.gallery.querySelector('ul.gallery__cards');
+  this.cardsUnorderedList = gallery.querySelector('ul.gallery__cards');
   this.sortType = 'popularité';
   this.media = photographerInfo.media;
   this.sortedMedia = this.sortGalleryCardsBy(
     this.sort[this.sortType],
     this.media
   );
+  this.lightBox = gallery.querySelector('.lightbox-modal');
+  const lightBoxCloseButton = gallery.querySelector(
+    'button.lightbox-modal__close-btn'
+  );
 
   this.renderGalleryCards();
+
+  // Event listeners
+  this.cardsUnorderedList.addEventListener('click', (event) =>
+    this.handleGalleryEvent(event)
+  );
+  lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
 }
 
 Gallery.prototype.renderGalleryCards = function () {
@@ -21,6 +33,7 @@ Gallery.prototype.renderGalleryCards = function () {
                 class="photo-card__img"
                 src="../../assets/medias/${media.photographerId}/${media.image}"
                 alt="${media.title}, click or enter to open closeup view"
+                data-media-id="${media.id}"
                 tabindex="0"
                 aria-haspopup="dialog"
               />
@@ -50,6 +63,41 @@ Gallery.prototype.sort = {
 
 Gallery.prototype.sortGalleryCardsBy = function (sortFn, media) {
   return media.sort(sortFn);
+};
+
+Gallery.prototype.openLightBox = async function () {
+  this.lightBox.removeAttribute('hidden');
+  await wait();
+  this.lightBox.setAttribute('aria-hidden', 'false');
+};
+
+Gallery.prototype.closeLightBox = async function () {
+  this.lightBox.setAttribute('aria-hidden', 'true');
+  await wait(500);
+  this.lightBox.setAttribute('hidden', '');
+};
+
+Gallery.prototype.updateLightBoxMedia = function () {
+  const media = this.sortedMedia[this.currentMediaIndex];
+  const lightBoxContent = this.gallery.querySelector('.lightbox-modal__img');
+  const lightBoxTitle = this.gallery.querySelector('.lightbox-modal__title');
+
+  lightBoxContent.src = `../../assets/medias/${media.photographerId}/${media.image}`;
+  lightBoxContent.alt = `${media.title}`;
+  lightBoxTitle.textContent = `${media.title}`;
+};
+
+Gallery.prototype.handleGalleryEvent = function (event) {
+  const el = event.target;
+  if (el.classList.contains('photo-card__img')) {
+    const { mediaId } = el.dataset;
+    this.currentMediaIndex = this.sortedMedia.findIndex(
+      (media) => media.id === +mediaId
+    );
+    this.updateLightBoxMedia();
+    // console.log(this.currentMediaIndex);
+    this.openLightBox();
+  }
 };
 
 export default function galleryInit(gallerySection, photographerInfo) {
