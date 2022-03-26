@@ -43,7 +43,7 @@ function ContactModal(modal, photographerInfo) {
   const modalTitle = modal.querySelector('.contact-modal__title');
   this.closeModalButton = modal.querySelector('button.contact-modal__close');
   this.submitButton = modal.querySelector('button[aria-label="send message"]');
-  this.from = modal.querySelector('form.contact-modal__form');
+  this.form = modal.querySelector('form.contact-modal__form');
 
   modalTitle.innerHTML = `Contactez-moi<br />${photographerInfo.name}`;
 
@@ -58,7 +58,8 @@ ContactModal.prototype.openModal = async function () {
   this.modal.removeAttribute('hidden');
   await wait();
   this.modal.setAttribute('aria-hidden', 'false');
-  this.from.querySelector('input').focus();
+  console.log(this);
+  this.form.querySelector('input').focus();
 };
 
 ContactModal.prototype.closeModal = async function () {
