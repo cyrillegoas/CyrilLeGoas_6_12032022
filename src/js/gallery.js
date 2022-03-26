@@ -29,6 +29,9 @@ function Gallery(gallery, photographerInfo) {
   lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
   lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
   lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
+  this.lightBox.addEventListener('keydown', (event) =>
+    this.handleKeyDown(event)
+  );
 }
 
 Gallery.prototype.renderGalleryCards = function () {
@@ -77,6 +80,7 @@ Gallery.prototype.openLightBox = async function () {
   this.lightBox.removeAttribute('hidden');
   await wait();
   this.lightBox.setAttribute('aria-hidden', 'false');
+  this.lightBox.focus();
 };
 
 Gallery.prototype.closeLightBox = async function () {
@@ -117,6 +121,18 @@ Gallery.prototype.prevMedia = function () {
   if (--this.currentMediaIndex <= 0)
     this.currentMediaIndex = this.sortedMedia.length - 1;
   this.updateLightBoxMedia();
+};
+
+Gallery.prototype.handleKeyDown = function (event) {
+  console.log(event);
+  switch (event.key) {
+    case 'Escape':
+      this.closeLightBox();
+      break;
+
+    default:
+      break;
+  }
 };
 
 export default function galleryInit(gallerySection, photographerInfo) {
