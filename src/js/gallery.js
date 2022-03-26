@@ -26,6 +26,9 @@ function Gallery(gallery, photographerInfo) {
   this.cardsUnorderedList.addEventListener('click', (event) =>
     this.handleGalleryEvent(event)
   );
+  this.cardsUnorderedList.addEventListener('keydown', (event) =>
+    this.handleGalleryEvent(event)
+  );
   lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
   this.lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
   this.lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
@@ -100,14 +103,19 @@ Gallery.prototype.updateLightBoxMedia = function () {
 };
 
 Gallery.prototype.handleGalleryEvent = function (event) {
-  const el = event.target;
-  if (el.classList.contains('photo-card__img')) {
-    const { mediaId } = el.dataset;
-    this.currentMediaIndex = this.sortedMedia.findIndex(
-      (media) => media.id === +mediaId
-    );
-    this.updateLightBoxMedia();
-    this.openLightBox();
+  if (
+    (event.type === 'keydown' && event.key === 'Enter') ||
+    event.type === 'click'
+  ) {
+    const el = event.target;
+    if (el.classList.contains('photo-card__img')) {
+      const { mediaId } = el.dataset;
+      this.currentMediaIndex = this.sortedMedia.findIndex(
+        (media) => media.id === +mediaId
+      );
+      this.updateLightBoxMedia();
+      this.openLightBox();
+    }
   }
 };
 
