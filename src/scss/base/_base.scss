@@ -7,7 +7,7 @@ ol {
   list-style: none;
 }
 
-*:focus {
+*:focus-visible {
   outline: 4px solid $focus-outline-color;
   outline-offset: 4px;
 }
