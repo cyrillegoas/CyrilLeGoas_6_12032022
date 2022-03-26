@@ -58,6 +58,7 @@ ContactModal.prototype.openModal = async function () {
   this.modal.removeAttribute('hidden');
   await wait();
   this.modal.setAttribute('aria-hidden', 'false');
+  this.focusBeforeOpenning = document.activeElement;
   this.modal.focus();
 };
 
@@ -65,6 +66,7 @@ ContactModal.prototype.closeModal = async function () {
   this.modal.setAttribute('aria-hidden', 'true');
   await wait(500);
   this.modal.setAttribute('hidden', '');
+  this.focusBeforeOpenning.focus();
 };
 
 ContactModal.prototype.handleClickOutside = function (event) {
