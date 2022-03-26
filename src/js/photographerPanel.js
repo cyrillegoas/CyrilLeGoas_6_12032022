@@ -50,7 +50,7 @@ function ContactModal(modal, photographerInfo) {
   // Event listener
   modal.addEventListener('click', (event) => this.handleClickOutside(event));
   this.closeModalButton.addEventListener('click', () => this.closeModal());
-  this.from.addEventListener('submit', (event) => this.submitForm(event));
+  this.form.addEventListener('submit', (event) => this.submitForm(event));
   modal.addEventListener('keydown', (event) => this.handleKeyDown(event));
 }
 
