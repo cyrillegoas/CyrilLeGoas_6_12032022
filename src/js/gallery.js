@@ -11,6 +11,10 @@ function Gallery(gallery, photographerInfo) {
   this.sortedMedia.forEach((media) => {
     media.isliked = false;
   });
+  this.likesCount = this.sortedMedia.reduce(
+    (totalLikes, media) => totalLikes + media.likes,
+    0
+  );
   this.likeCounter = gallery.querySelector('.like-counter__total');
   this.lightBox = gallery.querySelector('.lightbox-modal');
   const lightBoxCloseButton = gallery.querySelector(
