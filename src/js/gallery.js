@@ -4,15 +4,13 @@ function Gallery(gallery, photographerInfo) {
   this.gallery = gallery;
   this.cardsUnorderedList = gallery.querySelector('ul.gallery__cards');
   this.sortType = 'popularité';
-  this.media = photographerInfo.media;
   this.sortedMedia = this.sortGalleryCardsBy(
     this.sort[this.sortType],
-    this.media
+    photographerInfo.media
   );
-  this.likesCount = this.sortedMedia.reduce(
-    (totalLikes, media) => totalLikes + media.likes,
-    0
-  );
+  this.sortedMedia.forEach((media) => {
+    media.isliked = false;
+  });
   this.likeCounter = gallery.querySelector('.like-counter__total');
   this.lightBox = gallery.querySelector('.lightbox-modal');
   const lightBoxCloseButton = gallery.querySelector(
@@ -61,7 +59,9 @@ Gallery.prototype.renderGalleryCards = function () {
                 <div class="photo-card__likes">
                   <span class="photo-card__likes-count">${media.likes}</span>
                   <img
-                    class="photo-card__likes-icon"
+                    class="photo-card__likes-icon ${
+                      media.isliked ? 'photo-card__likes-icon--liked' : null
+                    }"
                     src="../../assets/utils/heart.svg"
                     alt="likes"
                     tabindex="0"
@@ -141,6 +141,7 @@ Gallery.prototype.updateCardLikes = function (likeCounter) {
     media.likes += 1;
     this.likesCount += 1;
   }
+  media.isliked = !media.isliked;
   icon.classList.toggle('photo-card__likes-icon--liked');
   count.textContent = media.likes;
   this.updateLikeCounter();
