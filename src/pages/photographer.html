@@ -84,28 +84,45 @@
       <div class="gallery-wrapper">
         <section class="gallery">
           <div class="filter">
-            <span class="filter__label"> Trier par </span>
+            <label class="filter__label" for="listbox-control">
+              Trier par
+            </label>
             <div class="filter__select">
-              <div class="filter__btn">
-                <div class="filter__option-wrapper">
-                  <span class="filter__option">Popularité</span>
+              <button
+                class="filter__btn"
+                tabindex="0"
+                aria-haspopup="listbox"
+                id="listbox-control"
+              >
+                <div class="filter__control-wrapper">
+                  Popularité
                   <img
                     class="filter__arrow"
                     src="../../assets/utils/arrow.svg"
                     alt=""
                   />
                 </div>
-              </div>
-              <div class="filter__dropdown">
-                <span class="filter__line"></span>
-                <div class="filter__option-wrapper">
-                  <span class="filter__option">Date</span>
-                </div>
-                <span class="filter__line"></span>
-                <div class="filter__option-wrapper">
-                  <span class="filter__option">Titre</span>
-                </div>
-              </div>
+              </button>
+              <ul
+                class="filter__dropdown"
+                role="listbox"
+                aria-activedescendant="popularité"
+                tabindex="0"
+              >
+                <li
+                  id="popularité"
+                  class="filter__option-wrapper"
+                  role="option"
+                >
+                  Popularité
+                </li>
+                <li id="date" class="filter__option-wrapper" role="option">
+                  Date
+                </li>
+                <li id="titre" class="filter__option-wrapper" role="option">
+                  Titre
+                </li>
+              </ul>
             </div>
           </div>
           <ul class="gallery__cards"></ul>

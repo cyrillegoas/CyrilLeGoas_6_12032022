@@ -3,11 +3,7 @@ import { wait } from './utils';
 function Gallery(gallery, photographerInfo) {
   this.gallery = gallery;
   this.cardsUnorderedList = gallery.querySelector('ul.gallery__cards');
-  this.sortType = 'popularité';
-  this.sortedMedia = this.sortGalleryCardsBy(
-    this.sort[this.sortType],
-    photographerInfo.media
-  );
+  this.sortedMedia = this.sortGalleryCardsBy(photographerInfo.media);
   this.sortedMedia.forEach((media) => {
     media.isliked = false;
   });
@@ -26,6 +22,9 @@ function Gallery(gallery, photographerInfo) {
   this.lightBoxPrevbutton = gallery.querySelector(
     'button.lightbox-modal__prev-btn'
   );
+  this.filter = gallery.querySelector('.filter');
+  const filterbutton = this.filter.querySelector('.filter__btn');
+  this.filterListBox = this.filter.querySelector('[role="listbox"]');
 
   this.renderGalleryCards();
   this.updateLikeCounter();
@@ -42,6 +41,10 @@ function Gallery(gallery, photographerInfo) {
   this.lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
   this.lightBox.addEventListener('keydown', (event) =>
     this.handleKeyDown(event)
+  );
+  filterbutton.addEventListener('click', () => this.toggleFilterListBox());
+  this.filterListBox.addEventListener('click', (event) =>
+    this.selectOption(event)
   );
 }
 
@@ -79,13 +82,16 @@ Gallery.prototype.renderGalleryCards = function () {
   this.cardsUnorderedList.innerHTML = html;
 };
 
-Gallery.prototype.sort = {
+Gallery.prototype.compareFn = {
   popularité: (a, b) => a.likes < b.likes,
   date: (a, b) => new Date(a.date).getTime() < new Date(b.date).getTime(),
   titre: (a, b) => a.title > b.title,
 };
 
-Gallery.prototype.sortGalleryCardsBy = function (sortFn, media) {
+Gallery.prototype.sortGalleryCardsBy = function (
+  media,
+  sortFn = this.compareFn.popularité
+) {
   return media.sort(sortFn);
 };
 
@@ -196,6 +202,23 @@ Gallery.prototype.handleKeyDown = function (event) {
 
 Gallery.prototype.updateLikeCounter = function () {
   this.likeCounter.textContent = this.likesCount;
+};
+
+Gallery.prototype.toggleFilterListBox = function () {
+  const filterSelect = this.filter.querySelector('.filter__select');
+  filterSelect.classList.toggle('filter__select--open');
+};
+
+Gallery.prototype.selectOption = function (event) {
+  if (event.target !== event.currentTarget) {
+    const option = event.target;
+    const buttonText = this.filter.querySelector('.filter__control-wrapper');
+    this.sortGalleryCardsBy(this.sortedMedia, this.compareFn[option.id]);
+    this.filterListBox.setAttribute('aria-activedescendant', option.id);
+    buttonText.firstChild.textContent = option.innerText;
+    this.toggleFilterListBox();
+    this.renderGalleryCards();
+  }
 };
 
 export default function galleryInit(gallerySection, photographerInfo) {

@@ -58,8 +58,10 @@
 
   &__btn {
     padding: 1rem;
+    border: 0;
   }
 
+  &__control-wrapper,
   &__option-wrapper {
     padding: 1rem;
     display: flex;
@@ -70,6 +72,14 @@
     &:hover {
       background-color: hsla(0, 0%, 100%, 20%);
     }
+  }
+
+  &__control-wrapper {
+    padding-right: 0.2rem;
+  }
+
+  &__option-wrapper {
+    border-top: 1px solid white;
   }
 
   &__dropdown {
