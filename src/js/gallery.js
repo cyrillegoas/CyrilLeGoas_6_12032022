@@ -47,24 +47,24 @@ Gallery.prototype.renderGalleryCards = function () {
   const html = this.sortedMedia
     .map(
       (media) =>
-        `<li class="gallery__card">
+        `<li class="gallery__card" data-media-id="${media.id}">
             <figure class="photo-card">
               <img
                 class="photo-card__img"
                 src="../../assets/medias/${media.photographerId}/${media.image}"
                 alt="${media.title}, click or enter to open closeup view"
-                data-media-id="${media.id}"
                 tabindex="0"
                 aria-haspopup="dialog"
               />
               <figcaption class="photo-card__description">
                 <span class="photo-card__name">${media.title}</span>
-                <div class="photo-card__likes" tabindex="0">
+                <div class="photo-card__likes">
                   <span class="photo-card__likes-count">${media.likes}</span>
                   <img
                     class="photo-card__likes-icon"
                     src="../../assets/utils/heart.svg"
                     alt="likes"
+                    tabindex="0"
                   />
                 </div>
               </figcaption>
@@ -117,14 +117,33 @@ Gallery.prototype.handleGalleryEvent = function (event) {
   ) {
     const el = event.target;
     if (el.classList.contains('photo-card__img')) {
-      const { mediaId } = el.dataset;
+      const { mediaId } = el.closest('.gallery__card').dataset;
       this.currentMediaIndex = this.sortedMedia.findIndex(
         (media) => media.id === +mediaId
       );
       this.updateLightBoxMedia();
       this.openLightBox();
+    } else if (el.classList.contains('photo-card__likes-icon')) {
+      this.updateCardLikes(el.parentElement);
     }
   }
+};
+
+Gallery.prototype.updateCardLikes = function (likeCounter) {
+  const { mediaId } = likeCounter.closest('.gallery__card').dataset;
+  const media = this.sortedMedia.find((media) => media.id === +mediaId);
+  const count = likeCounter.firstElementChild;
+  const icon = likeCounter.lastElementChild;
+  if (icon.classList.contains('photo-card__likes-icon--liked')) {
+    media.likes -= 1;
+    this.likesCount -= 1;
+  } else {
+    media.likes += 1;
+    this.likesCount += 1;
+  }
+  icon.classList.toggle('photo-card__likes-icon--liked');
+  count.textContent = media.likes;
+  this.updateLikeCounter();
 };
 
 Gallery.prototype.nextMedia = function () {
