@@ -159,6 +159,7 @@ Gallery.prototype.updateLightBoxMedia = function () {
   }`;
 
   lightBoxTitle.textContent = `${media.title}`;
+  this.lightBox.focus();
 };
 
 Gallery.prototype.handleGalleryEvent = function (event) {
