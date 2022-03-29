@@ -204,9 +204,17 @@ Gallery.prototype.updateLikeCounter = function () {
   this.likeCounter.textContent = this.likesCount;
 };
 
-Gallery.prototype.toggleFilterListBox = function () {
+Gallery.prototype.toggleFilterListBox = async function () {
   const filterSelect = this.filter.querySelector('.filter__select');
-  filterSelect.classList.toggle('filter__select--open');
+  if (this.filterListBox.hasAttribute('hidden')) {
+    this.filterListBox.removeAttribute('hidden');
+    await wait();
+    filterSelect.classList.add('filter__select--open');
+  } else {
+    filterSelect.classList.remove('filter__select--open');
+    await wait(300);
+    this.filterListBox.setAttribute('hidden', '');
+  }
 };
 
 Gallery.prototype.selectOption = function (event) {

@@ -95,6 +95,10 @@
     & .filter__option-wrapper {
       padding: 1.4rem 1rem;
     }
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   &__arrow {
