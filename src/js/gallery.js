@@ -1,17 +1,22 @@
 import { wait } from './utils';
 
 function Gallery(gallery, photographerInfo) {
+  // GALLERY
   this.gallery = gallery;
   this.cardsUnorderedList = gallery.querySelector('ul.gallery__cards');
   this.sortedMedia = this.sortGalleryCardsBy(photographerInfo.media);
   this.sortedMedia.forEach((media) => {
     media.isliked = false;
   });
+
+  // LIKES
   this.likesCount = this.sortedMedia.reduce(
     (totalLikes, media) => totalLikes + media.likes,
     0
   );
   this.likeCounter = gallery.querySelector('.like-counter__total');
+
+  // LIGHTBOX
   this.lightBox = gallery.querySelector('.lightbox-modal');
   const lightBoxCloseButton = gallery.querySelector(
     'button.lightbox-modal__close-btn'
@@ -22,29 +27,45 @@ function Gallery(gallery, photographerInfo) {
   this.lightBoxPrevbutton = gallery.querySelector(
     'button.lightbox-modal__prev-btn'
   );
+
+  // FILTER
   this.filter = gallery.querySelector('.filter');
   const filterbutton = this.filter.querySelector('.filter__btn');
   this.filterListBox = this.filter.querySelector('[role="listbox"]');
+  this.listBoxOptions = Array.from(this.filterListBox.querySelectorAll('li'));
+  this.selectedOptionIndex = 0;
 
   this.renderGalleryCards();
   this.updateLikeCounter();
 
   // Event listeners
+  // GALLERY
   this.cardsUnorderedList.addEventListener('click', (event) =>
     this.handleGalleryEvent(event)
   );
   this.cardsUnorderedList.addEventListener('keydown', (event) =>
     this.handleGalleryEvent(event)
   );
+
+  // LIGHTBOX
   lightBoxCloseButton.addEventListener('click', () => this.closeLightBox());
   this.lightBoxNextbutton.addEventListener('click', () => this.nextMedia());
   this.lightBoxPrevbutton.addEventListener('click', () => this.prevMedia());
   this.lightBox.addEventListener('keydown', (event) =>
     this.handleKeyDown(event)
   );
+
+  // FILTER
   filterbutton.addEventListener('click', () => this.toggleFilterListBox());
   this.filterListBox.addEventListener('click', (event) =>
-    this.selectOption(event)
+    this.getClickedOption(event)
+  );
+  this.filterListBox.addEventListener('focus', () => {
+    this.setActiveDescendant();
+    this.setOptionfocus();
+  });
+  this.filterListBox.addEventListener('keydown', (event) =>
+    this.filterKeyDown(event)
   );
 }
 
@@ -210,22 +231,90 @@ Gallery.prototype.toggleFilterListBox = async function () {
     this.filterListBox.removeAttribute('hidden');
     await wait();
     filterSelect.classList.add('filter__select--open');
+    this.filterListBox.focus();
   } else {
+    this.clearAllFocusDesc();
     filterSelect.classList.remove('filter__select--open');
     await wait(300);
     this.filterListBox.setAttribute('hidden', '');
   }
 };
 
-Gallery.prototype.selectOption = function (event) {
+Gallery.prototype.getClickedOption = function (event) {
   if (event.target !== event.currentTarget) {
-    const option = event.target;
-    const buttonText = this.filter.querySelector('.filter__control-wrapper');
-    this.sortGalleryCardsBy(this.sortedMedia, this.compareFn[option.id]);
-    this.filterListBox.setAttribute('aria-activedescendant', option.id);
-    buttonText.firstChild.textContent = option.innerText;
-    this.toggleFilterListBox();
-    this.renderGalleryCards();
+    const clikedOption = event.target;
+    this.selectedOptionIndex = this.listBoxOptions.findIndex(
+      (option) => option === clikedOption
+    );
+    this.setOption();
+  }
+};
+
+Gallery.prototype.setOption = function () {
+  const option = this.listBoxOptions[this.selectedOptionIndex];
+  const buttonText = this.filter.querySelector('.filter__control-wrapper');
+  this.sortGalleryCardsBy(this.sortedMedia, this.compareFn[option.id]);
+  buttonText.firstChild.textContent = option.innerText;
+  this.toggleFilterListBox();
+  this.renderGalleryCards();
+};
+
+Gallery.prototype.setActiveDescendant = function () {
+  const option = this.listBoxOptions[this.selectedOptionIndex];
+  this.filterListBox.setAttribute('aria-activedescendant', option.id);
+};
+
+Gallery.prototype.removeActiveDescendant = function () {
+  this.filterListBox.removeAttribute('aria-activedescendant');
+};
+
+Gallery.prototype.setOptionfocus = function () {
+  const option = this.listBoxOptions[this.selectedOptionIndex];
+  option.classList.add('filter__option-wrapper--focus');
+};
+
+Gallery.prototype.removeOptionfocus = function () {
+  const option = this.listBoxOptions[this.selectedOptionIndex];
+  option.classList.remove('filter__option-wrapper--focus');
+};
+
+Gallery.prototype.clearAllFocusDesc = function () {
+  this.listBoxOptions.forEach((option) => {
+    option.classList.remove('filter__option-wrapper--focus');
+  });
+  this.removeActiveDescendant();
+};
+
+Gallery.prototype.filterKeyDown = function (event) {
+  switch (event.key) {
+    case 'ArrowDown':
+      event.preventDefault();
+      if (this.selectedOptionIndex < this.listBoxOptions.length - 1) {
+        this.removeOptionfocus();
+        this.selectedOptionIndex += 1;
+        this.setActiveDescendant();
+        this.setOptionfocus();
+      }
+      break;
+    case 'ArrowUp':
+      event.preventDefault();
+      if (this.selectedOptionIndex > 0) {
+        this.removeOptionfocus();
+        this.selectedOptionIndex -= 1;
+        this.setActiveDescendant();
+        this.setOptionfocus();
+      }
+      break;
+    case 'Enter':
+    case ' ':
+      event.preventDefault();
+      this.setOption();
+      break;
+    case 'Escape':
+      this.toggleFilterListBox();
+      break;
+    default:
+      break;
   }
 };
 

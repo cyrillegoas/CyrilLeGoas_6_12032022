@@ -84,7 +84,11 @@
       <div class="gallery-wrapper">
         <section class="gallery">
           <div class="filter">
-            <label class="filter__label" for="listbox-control">
+            <label
+              id="filter-label"
+              class="filter__label"
+              for="listbox-control"
+            >
               Trier par
             </label>
             <div class="filter__select">
@@ -106,7 +110,7 @@
               <ul
                 class="filter__dropdown"
                 role="listbox"
-                aria-activedescendant="popularité"
+                aria-labelledby="filter-label"
                 tabindex="0"
                 hidden
               >

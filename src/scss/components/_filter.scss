@@ -70,7 +70,7 @@
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
     &:hover {
-      background-color: hsla(0, 0%, 100%, 20%);
+      background-color: hsla(0, 0%, 100%, 30%);
     }
   }
 
@@ -80,6 +80,10 @@
 
   &__option-wrapper {
     border-top: 1px solid white;
+
+    &--focus {
+      background-color: hsla(0, 0%, 100%, 20%);
+    }
   }
 
   &__dropdown {
