@@ -1,7 +1,8 @@
 @use "../abstracts" as *;
 
 .photo-card {
-  &__img {
+  &__img,
+  &__video {
     height: 300px;
     width: 100%;
     margin-bottom: 1rem;

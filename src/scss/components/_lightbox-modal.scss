@@ -57,6 +57,14 @@
 
   &__img {
     object-fit: contain;
+  }
+
+  &__video {
+    max-width: 100%;
+  }
+
+  &__img,
+  &__video {
     height: 90vh;
 
     @include respond-to("portrait") {

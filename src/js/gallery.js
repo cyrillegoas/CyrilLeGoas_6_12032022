@@ -76,13 +76,19 @@ Gallery.prototype.renderGalleryCards = function () {
       (media) =>
         `<li class="gallery__card" data-media-id="${media.id}">
             <figure class="photo-card">
-              <img
-                class="photo-card__img"
-                src="../../assets/medias/${media.photographerId}/${media.image}"
-                alt="${media.title}, click or enter to open closeup view"
-                tabindex="0"
-                aria-haspopup="dialog"
-              />
+              ${
+                media.image
+                  ? `<img
+                    class="photo-card__img"
+                    src="../../assets/medias/${media.photographerId}/${media.image}"
+                    alt="${media.title}, click or enter to open closeup view"
+                    tabindex="0"
+                    aria-haspopup="dialog"
+                  />`
+                  : `<video class="photo-card__video" tabindex="0" aria-haspopup="dialog">
+                      <source src="../../assets/medias/${media.photographerId}/${media.video}" type="video/mp4" />
+                    </video>`
+              }
               <figcaption class="photo-card__description">
                 <span class="photo-card__name">${media.title}</span>
                 <div class="photo-card__likes">
@@ -133,11 +139,25 @@ Gallery.prototype.closeLightBox = async function () {
 
 Gallery.prototype.updateLightBoxMedia = function () {
   const media = this.sortedMedia[this.currentMediaIndex];
-  const lightBoxContent = this.gallery.querySelector('.lightbox-modal__img');
+  const lightBoxContentWrapper = this.gallery.querySelector(
+    '.lightbox-modal__img-wrapper'
+  );
   const lightBoxTitle = this.gallery.querySelector('.lightbox-modal__title');
 
-  lightBoxContent.src = `../../assets/medias/${media.photographerId}/${media.image}`;
-  lightBoxContent.alt = `${media.title}`;
+  lightBoxContentWrapper.innerHTML = `${
+    media.image
+      ? `<img
+      class="lightbox-modal__img"
+      src="../../assets/medias/${media.photographerId}/${media.image}"
+      alt="${media.title}" />`
+      : `<video
+          class="lightbox-modal__video"
+          controls
+        >
+          <source src="../../assets/medias/${media.photographerId}/${media.video}"  type="video/mp4"/>
+        </video>`
+  }`;
+
   lightBoxTitle.textContent = `${media.title}`;
 };
 
@@ -147,7 +167,10 @@ Gallery.prototype.handleGalleryEvent = function (event) {
     event.type === 'click'
   ) {
     const el = event.target;
-    if (el.classList.contains('photo-card__img')) {
+    if (
+      el.classList.contains('photo-card__img') ||
+      el.classList.contains('photo-card__video')
+    ) {
       const { mediaId } = el.closest('.gallery__card').dataset;
       this.currentMediaIndex = this.sortedMedia.findIndex(
         (media) => media.id === +mediaId
