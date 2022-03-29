@@ -29,14 +29,13 @@
     align-items: center;
     gap: 0.637rem;
     flex-shrink: 0;
-    cursor: pointer;
   }
 
   &__likes-icon {
     width: 1.9rem;
     height: 1.9rem;
     transition: filter 0.7s ease-in-out;
-
+    cursor: pointer;
     &--liked {
       filter: saturate(500%);
     }
