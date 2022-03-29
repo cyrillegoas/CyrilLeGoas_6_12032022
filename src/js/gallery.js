@@ -4,7 +4,8 @@ function Gallery(gallery, photographerInfo) {
   // GALLERY
   this.gallery = gallery;
   this.cardsUnorderedList = gallery.querySelector('ul.gallery__cards');
-  this.sortedMedia = this.sortGalleryCardsBy(photographerInfo.media);
+  this.sortedMedia = photographerInfo.media;
+  this.sortGalleryCardsBy();
   this.sortedMedia.forEach((media) => {
     media.isliked = false;
   });
@@ -104,16 +105,15 @@ Gallery.prototype.renderGalleryCards = function () {
 };
 
 Gallery.prototype.compareFn = {
-  popularité: (a, b) => a.likes < b.likes,
-  date: (a, b) => new Date(a.date).getTime() < new Date(b.date).getTime(),
-  titre: (a, b) => a.title > b.title,
+  popularité: (a, b) => b.likes - a.likes,
+  date: (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  titre: (a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0),
 };
 
 Gallery.prototype.sortGalleryCardsBy = function (
-  media,
   sortFn = this.compareFn.popularité
 ) {
-  return media.sort(sortFn);
+  this.sortedMedia.sort(sortFn);
 };
 
 Gallery.prototype.openLightBox = async function () {
@@ -253,7 +253,7 @@ Gallery.prototype.getClickedOption = function (event) {
 Gallery.prototype.setOption = function () {
   const option = this.listBoxOptions[this.selectedOptionIndex];
   const buttonText = this.filter.querySelector('.filter__control-wrapper');
-  this.sortGalleryCardsBy(this.sortedMedia, this.compareFn[option.id]);
+  this.sortGalleryCardsBy(this.compareFn[option.id]);
   buttonText.firstChild.textContent = option.innerText;
   this.toggleFilterListBox();
   this.renderGalleryCards();
