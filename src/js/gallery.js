@@ -141,7 +141,7 @@ Gallery.prototype.closeLightBox = async function () {
 Gallery.prototype.updateLightBoxMedia = function () {
   const media = this.sortedMedia[this.currentMediaIndex];
   const lightBoxContentWrapper = this.gallery.querySelector(
-    '.lightbox-modal__img-wrapper'
+    '.lightbox-modal__content-wrapper'
   );
   const lightBoxTitle = this.gallery.querySelector('.lightbox-modal__title');
 
