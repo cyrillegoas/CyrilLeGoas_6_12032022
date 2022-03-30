@@ -1,3 +1,4 @@
+import params from './appParams';
 /**
  * Generate profiles cards from an array of list of photographers.
  * @param {object} photographers - collection of photographer information
@@ -17,7 +18,7 @@ function generatePhotographersCards(photographers) {
               <div class="photographer-thumb">
                 <img
                   class="photographer-thumb__img"
-                  src="./assets/medias/${photographer.id}/${photographer.portrait}"
+                  src="${params.cloudinaryBaseImg}${photographer.id}/${photographer.portrait}"
                   alt="${photographer.name}"
                 />
                 <object

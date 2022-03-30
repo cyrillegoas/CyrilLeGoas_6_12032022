@@ -1,4 +1,5 @@
 import { wait } from './utils';
+import params from './appParams';
 
 function Gallery(gallery, photographerInfo) {
   // GALLERY
@@ -80,13 +81,13 @@ Gallery.prototype.renderGalleryCards = function () {
                 media.image
                   ? `<img
                     class="photo-card__img"
-                    src="../../assets/medias/${media.photographerId}/${media.image}"
+                    src="${params.cloudinaryBaseImg}${media.photographerId}/${media.image}"
                     alt="${media.title}, click or enter to open closeup view"
                     tabindex="0"
                     aria-haspopup="dialog"
                   />`
                   : `<video class="photo-card__video" tabindex="0" aria-haspopup="dialog">
-                      <source src="../../assets/medias/${media.photographerId}/${media.video}" type="video/mp4" />
+                      <source src="${params.cloudinaryBaseVideo}${media.photographerId}/${media.video}" type="video/mp4" />
                     </video>`
               }
               <figcaption class="photo-card__description">
@@ -148,13 +149,13 @@ Gallery.prototype.updateLightBoxMedia = function () {
     media.image
       ? `<img
       class="lightbox-modal__img"
-      src="../../assets/medias/${media.photographerId}/${media.image}"
+      src="${params.cloudinaryBaseImg}${media.photographerId}/${media.image}"
       alt="${media.title}" />`
       : `<video
           class="lightbox-modal__video"
           controls
         >
-          <source src="../../assets/medias/${media.photographerId}/${media.video}"  type="video/mp4"/>
+          <source src="${params.cloudinaryBaseVideo}${media.photographerId}/${media.video}"  type="video/mp4"/>
         </video>`
   }`;
 

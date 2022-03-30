@@ -1,4 +1,5 @@
 import { wait } from './utils';
+import params from './appParams';
 
 /**
  * Generate photographer info panel html.
@@ -18,7 +19,7 @@ function generateInfoPanel(photographerInfo) {
     <div class="photographer-thumb">
       <img 
         class="photographer-thumb__img"
-        src="../../assets/medias/${photographerInfo.id}/${photographerInfo.portrait}"
+        src="${params.cloudinaryBaseImg}${photographerInfo.id}/${photographerInfo.portrait}"
         alt="${photographerInfo.name}"
       />
       <object
