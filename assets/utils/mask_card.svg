@@ -6,7 +6,7 @@
     </radialGradient>
     <mask id="b">
       <path fill="#FFF" d="M0 0h200v220H0z"/>
-      <circle fill="#000" cx="100" cy="100" r="99"/>
+      <circle fill="#000" cx="100" cy="99" r="99"/>
     </mask>
   </defs>
   
