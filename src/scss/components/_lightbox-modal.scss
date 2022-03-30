@@ -177,13 +177,15 @@
 
     @include respond-to("portrait") {
       position: absolute;
-      bottom: 2rem;
-      left: 2rem;
+      bottom: 6rem;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 1rem;
       background-color: $primary;
       color: $white;
       border-radius: $radius-normal;
       font-size: 1.5rem;
+      width: max-content;
     }
   }
 }
