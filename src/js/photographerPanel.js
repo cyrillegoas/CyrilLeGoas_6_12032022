@@ -96,6 +96,10 @@ ContactModal.prototype.handleKeyDown = function (event) {
   }
 };
 
+/**
+ * console log the user's inputs.
+ * @param {object} event - submit event.
+ */
 ContactModal.prototype.submitForm = function (event) {
   event.preventDefault();
   const inputs = this.modal.querySelectorAll('input');

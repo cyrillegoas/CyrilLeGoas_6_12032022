@@ -71,6 +71,9 @@ function Gallery(gallery, photographerInfo) {
   );
 }
 
+/**
+ * Add cards to the gallery for each entries of the media array
+ */
 Gallery.prototype.renderGalleryCards = function () {
   const html = this.sortedMedia
     .map(
@@ -111,18 +114,28 @@ Gallery.prototype.renderGalleryCards = function () {
   this.cardsUnorderedList.innerHTML = html;
 };
 
+/**
+ * Collection of compare functions
+ */
 Gallery.prototype.compareFn = {
   popularité: (a, b) => b.likes - a.likes,
   date: (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   titre: (a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0),
 };
 
+/**
+ * Sorts the medias (mutate photographerInfo)
+ * @param {function} sortFn - compare function used to sort the array.
+ */
 Gallery.prototype.sortGalleryCardsBy = function (
   sortFn = this.compareFn.popularité
 ) {
   this.sortedMedia.sort(sortFn);
 };
 
+/**
+ * Opens lightbox modal
+ */
 Gallery.prototype.openLightBox = async function () {
   this.lightBox.removeAttribute('hidden');
   await wait();
@@ -131,6 +144,9 @@ Gallery.prototype.openLightBox = async function () {
   this.lightBox.focus();
 };
 
+/**
+ * Closes lightbox modal
+ */
 Gallery.prototype.closeLightBox = async function () {
   this.lightBox.setAttribute('aria-hidden', 'true');
   await wait(500);
@@ -138,6 +154,9 @@ Gallery.prototype.closeLightBox = async function () {
   this.focusBeforeOpenning.focus();
 };
 
+/**
+ * Updates the displayed media
+ */
 Gallery.prototype.updateLightBoxMedia = function () {
   const media = this.sortedMedia[this.currentMediaIndex];
   const lightBoxContentWrapper = this.gallery.querySelector(
@@ -163,6 +182,10 @@ Gallery.prototype.updateLightBoxMedia = function () {
   this.lightBox.focus();
 };
 
+/**
+ * Checks if the user clicked on the like icon or want to open the lightbox
+ * @param {object} event - click or keydown event.
+ */
 Gallery.prototype.handleGalleryEvent = function (event) {
   if (
     (event.type === 'keydown' && event.key === 'Enter') ||
@@ -185,6 +208,9 @@ Gallery.prototype.handleGalleryEvent = function (event) {
   }
 };
 
+/**
+ * Updates the card like count
+ */
 Gallery.prototype.updateCardLikes = function (likeCounter) {
   const { mediaId } = likeCounter.closest('.gallery__card').dataset;
   const media = this.sortedMedia.find((media) => media.id === +mediaId);
@@ -203,18 +229,27 @@ Gallery.prototype.updateCardLikes = function (likeCounter) {
   this.updateLikeCounter();
 };
 
+/**
+ * Updates the displayed media in the lightbox by the next one in the array
+ */
 Gallery.prototype.nextMedia = function () {
   if (++this.currentMediaIndex >= this.sortedMedia.length)
     this.currentMediaIndex = 0;
   this.updateLightBoxMedia();
 };
 
+/**
+ * Updates the displayed media in the lightbx by the previous one in the array
+ */
 Gallery.prototype.prevMedia = function () {
   if (--this.currentMediaIndex <= 0)
     this.currentMediaIndex = this.sortedMedia.length - 1;
   this.updateLightBoxMedia();
 };
 
+/**
+ * Keyboard control of the lightbox
+ */
 Gallery.prototype.handleKeyDown = function (event) {
   switch (event.key) {
     case 'Escape':
@@ -246,10 +281,16 @@ Gallery.prototype.handleKeyDown = function (event) {
   }
 };
 
+/**
+ * Updates the gallery total likes
+ */
 Gallery.prototype.updateLikeCounter = function () {
   this.likeCounter.textContent = this.likesCount;
 };
 
+/**
+ * Open or close the "sort by" select options
+ */
 Gallery.prototype.toggleFilterListBox = async function () {
   const filterSelect = this.filter.querySelector('.filter__select');
   if (this.filterListBox.hasAttribute('hidden')) {
@@ -265,6 +306,9 @@ Gallery.prototype.toggleFilterListBox = async function () {
   }
 };
 
+/**
+ * Captures which option from the list was clicked
+ */
 Gallery.prototype.getClickedOption = function (event) {
   if (event.target !== event.currentTarget) {
     const clikedOption = event.target;
@@ -275,6 +319,9 @@ Gallery.prototype.getClickedOption = function (event) {
   }
 };
 
+/**
+ * Sorts the medias depending on the selected option
+ */
 Gallery.prototype.setOption = function () {
   const option = this.listBoxOptions[this.selectedOptionIndex];
   const buttonText = this.filter.querySelector('.filter__control-wrapper');
@@ -284,25 +331,40 @@ Gallery.prototype.setOption = function () {
   this.renderGalleryCards();
 };
 
+/**
+ * Sets listbox active descendant
+ */
 Gallery.prototype.setActiveDescendant = function () {
   const option = this.listBoxOptions[this.selectedOptionIndex];
   this.filterListBox.setAttribute('aria-activedescendant', option.id);
 };
 
+/**
+ * Removes listbox active descendant
+ */
 Gallery.prototype.removeActiveDescendant = function () {
   this.filterListBox.removeAttribute('aria-activedescendant');
 };
 
+/**
+ * Adds the focus class on the selected option
+ */
 Gallery.prototype.setOptionfocus = function () {
   const option = this.listBoxOptions[this.selectedOptionIndex];
   option.classList.add('filter__option-wrapper--focus');
 };
 
+/**
+ * Removes the focus class
+ */
 Gallery.prototype.removeOptionfocus = function () {
   const option = this.listBoxOptions[this.selectedOptionIndex];
   option.classList.remove('filter__option-wrapper--focus');
 };
 
+/**
+ * Removes the focus class from each option of the list and reset the active descendant
+ */
 Gallery.prototype.clearAllFocusDesc = function () {
   this.listBoxOptions.forEach((option) => {
     option.classList.remove('filter__option-wrapper--focus');
@@ -310,6 +372,9 @@ Gallery.prototype.clearAllFocusDesc = function () {
   this.removeActiveDescendant();
 };
 
+/**
+ * Keyboard controls of the select listbox
+ */
 Gallery.prototype.filterKeyDown = function (event) {
   switch (event.key) {
     case 'ArrowDown':
