@@ -21,12 +21,11 @@ function generatePhotographersCards(photographers) {
                   src="${params.cloudinaryBaseImg}${photographer.id}/${photographer.portrait}"
                   alt="${photographer.name}"
                 />
-                <object
+                <img
                   class="photographer-thumb__img-clip"
-                  data="./assets/utils/mask_card.svg"
-                  type="image/svg+xml"
+                  src="./assets/utils/mask_card.svg"
                   tabindex="-1"
-                ></object>
+                ></img>
               </div>
               <figcaption>
                 <h2 class="photographer-card__name">${photographer.name}</h2>

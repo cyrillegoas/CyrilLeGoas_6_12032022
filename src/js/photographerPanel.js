@@ -22,12 +22,11 @@ function generateInfoPanel(photographerInfo) {
         src="${params.cloudinaryBaseImg}${photographerInfo.id}/${photographerInfo.portrait}"
         alt="${photographerInfo.name}"
       />
-      <object
+      <img
         class="photographer-thumb__img-clip"
-        data="../../assets/utils/mask_card-grey.svg"
-        type="image/svg+xml"
+        src="../../assets/utils/mask_card-grey.svg"
         tabindex="-1"
-      ></object>
+      ></img>
     </div>`;
 }
 
