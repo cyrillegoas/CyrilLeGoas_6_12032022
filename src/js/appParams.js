@@ -1,5 +1,5 @@
 const params = {
-  dataPath: '../../assets/data/photographer.json',
+  dataPath: `${import.meta.env.BASE_URL}assets/data/photographer.json`,
   cloudinaryBaseImg:
     'https://res.cloudinary.com/cyrillegoas/image/upload/fisheye/',
   cloudinaryBaseVideo:
