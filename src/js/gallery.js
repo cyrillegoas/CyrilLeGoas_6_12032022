@@ -242,7 +242,7 @@ Gallery.prototype.nextMedia = function () {
  * Updates the displayed media in the lightbx by the previous one in the array
  */
 Gallery.prototype.prevMedia = function () {
-  if (--this.currentMediaIndex <= 0)
+  if (--this.currentMediaIndex < 0)
     this.currentMediaIndex = this.sortedMedia.length - 1;
   this.updateLightBoxMedia();
 };
