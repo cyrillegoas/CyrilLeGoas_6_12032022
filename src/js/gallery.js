@@ -10,6 +10,7 @@ function Gallery(gallery, photographerInfo) {
   this.sortedMedia.forEach((media) => {
     media.isliked = false;
   });
+  this.hourlyRate = photographerInfo.price;
 
   // LIKES
   this.likesCount = this.sortedMedia.reduce(
@@ -39,6 +40,7 @@ function Gallery(gallery, photographerInfo) {
 
   this.renderGalleryCards();
   this.updateLikeCounter();
+  this.updateRate();
 
   // Event listeners
   // GALLERY
@@ -286,6 +288,15 @@ Gallery.prototype.handleKeyDown = function (event) {
  */
 Gallery.prototype.updateLikeCounter = function () {
   this.likeCounter.textContent = this.likesCount;
+};
+
+/**
+ * Updates photographer hourly rate
+ */
+Gallery.prototype.updateRate = function () {
+  this.gallery.querySelector(
+    '.like-counter__rate'
+  ).textContent = `${this.hourlyRate}€ / jour`;
 };
 
 /**
