@@ -88,7 +88,6 @@ ContactModal.prototype.handleKeyDown = function (event) {
       }
       break;
     case 'Escape':
-      console.log('test');
       this.closeModal();
       break;
     default:
