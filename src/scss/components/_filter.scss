@@ -14,10 +14,6 @@
   flex-wrap: wrap;
   gap: 2.5rem;
 
-  & span {
-    display: block;
-  }
-
   &__label {
     flex-basis: 100%;
     @include respond-to("smaller") {
